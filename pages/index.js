@@ -8,10 +8,13 @@ export default function Home() {
         <title>airbnb Clone</title>
 
       </Head>
+<<<<<<< HEAD
 
       {/* Header */}
       <Header />
       {/* Banner */}
+=======
+>>>>>>> b2c2b43b8cba86556f0311855333f1a517ca209d
 
       <main>
       
