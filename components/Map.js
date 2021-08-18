@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import ReactMapGl, {Marker, Popup} from 'react-map-gl';
+import ReactMapGl, {Marker, Popup, FlyToInterpolator} from 'react-map-gl';
 import getCenter from 'geolib/es/getCenter';
 
 function Map({searchResults}) {
@@ -14,7 +14,7 @@ function Map({searchResults}) {
     const [viewport,setViewport]=useState({
         width:'100%',
         height:'100%',
-        latitude:center.latitude,
+        latitude:center.latitude-0.15,
         longitude:center.longitude,
         zoom:11,
     })
@@ -38,7 +38,17 @@ function Map({searchResults}) {
                             <p 
                             role='img'
                             className='animate-bounce cursor-pointer text-2xl'
-                            onClick={()=>setSelectedLocation(result)}
+                            onClick={()=>{
+                                setSelectedLocation(result);
+                                setViewport({
+                                    ...viewport, 
+                                    longitude:result.long, 
+                                    latitude:result.lat-0.04, 
+                                    zoom:13,
+                                    transitionDuration: 2000,
+                                    transitionInterpolator: new FlyToInterpolator(),
+                                })
+                            }}
                             aria-label="push-pin"
                             >🎈</p>
                         </Marker>
